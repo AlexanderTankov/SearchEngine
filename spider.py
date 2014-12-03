@@ -82,11 +82,11 @@ def save_site_in_DB(url, session):
     my_session.add(new_site)
     my_session.commit()
 
-    my_domain_id = my_session.query(Site.site_id).filter(Site.url == "http://hackbulgaria.com").all()
+    my_domain_id = my_session.query(Site.site_id).filter(Site.url == url).all()
     return my_domain_id
 
 if __name__ == '__main__':
-    url = "hackbulgaria.com"
+    url = "boredpanda.com"
     engine = create_engine("sqlite:///{}.db".format(url))
     Base.metadata.create_all(engine)
 
