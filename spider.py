@@ -86,8 +86,8 @@ def save_site_in_DB(url, session):
     return my_domain_id
 
 if __name__ == '__main__':
-    url = "boredpanda.com"
-    engine = create_engine("sqlite:///{}.db".format(url))
+    url = "hackbulgaria.com"
+    engine = create_engine("sqlite:///storage.db")
     Base.metadata.create_all(engine)
 
     my_domain_id = save_site_in_DB("http://{}".format(url), engine)
