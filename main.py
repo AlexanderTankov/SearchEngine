@@ -17,17 +17,20 @@ def load_html():
 @app.route('/search/')
 def get_result():
 
+    searchword = request.args.get('key_word', '')
     engine = create_engine("sqlite:///storage.db")
     Base.metadata.create_all(engine)
 
     session = Session(bind=engine)
-    all_urls = session.query(Page).all()
+    #all_urls = session.query(Page).all()
 
-    return render_template('website.html', links=all_urls)
+    pages = session.query(Page).filter(Page.title.like(
+        "%" + searchword + "%")).all()
 
-    #searchword = request.args.get('key_word', '')
+    return render_template('result.html', pages=pages)
+
     #return searchword
 
 if __name__ == '__main__':
-    app.debug = True
+    app.debug = False
     app.run()
